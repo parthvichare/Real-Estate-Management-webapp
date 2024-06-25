@@ -1,0 +1,132 @@
+<!-- templates/blog/DataFrame.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'my_app/app.css' %}">
+</head>
+<body>
+    {% include 'blog/navbar.html' %}
+    <div class="content">
+      <h1 class="title">Your Houselisting Dash-Board</h1>
+      <form id="downloadForm" action="{% url 'download_posts' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="downld-btn">Download</button>
+      </form>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Beds</th>
+                        <th>Floor</th>
+                        <th>Furnishing</th>
+                        <th>Super Areas</th>
+                        <th>Delet_act</th>
+                        <th>Edit option</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>{{ post.property_id }}</td>
+                        <td>{{ post.name }}</td>
+                        <td>{{ post.price }}</td>
+                        <td>{{ post.beds }}</td>
+                        <td>{{ post.floor }}</td>
+                        <td>{{ post.furnishing }}</td>
+                        <td>{{ post.super_areas }}</td>
+                        <td>
+                            <form action="{% url 'delete' pk=post.pk %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                        <td>
+                          <form action="{% url 'update' pk=post.pk %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" >
+                              <a href="{% url 'update' pk=post.pk %}" >Edit</a>
+                            </button>
+                        </form>
+                         </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html> 
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post List</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'my_app/app.css' %}">
+</head>
+{% include 'blog/navbar.html' %}
+{% block content %}
+<body>
+  <h1 class="title">Your Houselisting Dash-Board</h1>
+  <form id="downloadForm" action="{% url 'download_posts' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="downld-btn">Download</button>
+  </form>
+  <table>
+    <thead>
+      <tr>
+        <th>Property ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Beds</th>
+        <th>Floor</th>
+        <th>Furnishing</th>
+        <th>Super Areas</th>
+        <th>Image</th>
+        <th>Delete_act</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+      <tr>
+        <td>{{ post.property_id }}</td>
+        <td>{{ post.name }}</td>
+        <td>{{ post.price }}</td>
+        <td>{{ post.beds }}</td>
+        <td>{{ post.floor }}</td>
+        <td>{{ post.furnishing }}</td>
+        <td>{{ post.super_areas }}</td>
+        <td><img src="{{post.Image_url}}" class="image"></td>
+        <td>
+          <form action="{% url 'delete' pk=post.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+        <td>
+          <form
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+{% endblock %}
+</html>  -->
+
+<!-- blog/post_list.html -->
+ <!-- blog/post_list.html -->

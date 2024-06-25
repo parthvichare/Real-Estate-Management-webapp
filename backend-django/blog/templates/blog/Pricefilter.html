@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+    {% include 'blog/navbar.html' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'my_app/app.css' %}">
+    <form action="{% url 'pricefilter' %}" method="GET">
+        <input type="hidden" name="price_filter" value="lac">
+        <button type="submit">Filter by Price in Lac</button>
+    </form>
+
+    <form action="{% url 'pricefilter' %}" method="GET">
+        <input type="hidden" name="price_filter" value="cr">
+        <button class='btn' type="submit">Filter by Price in Cr</button>
+    </form>
+
+    <a href="{% url 'pricefilter' %}">Show All Posts</a>
+
+
+    <ul>
+        {% for post in posts %}
+            <li>{{ post.name }} - {{ post.price }}</li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
