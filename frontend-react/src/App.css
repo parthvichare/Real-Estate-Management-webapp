@@ -1,0 +1,132 @@
+/* .post-list {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.post-list h1 {
+  color: #333;
+  text-align: center;
+}
+
+.post-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.post-list li {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.post-list li strong {
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.post-list li p {
+  margin: 0;
+  color: #666;
+} 
+
+.title{
+  color:#ee3737;
+  margin-top:100px;
+}
+
+.post_title{
+  color:yellowgreen;
+  margin:50px; 
+} */
+
+
+body{
+  background-color: rgb(255, 255, 255)
+}
+
+.download-btn {
+  margin-left:80%;
+  background-color: rgb(4, 0, 255);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
+h1{
+  text-align:center;
+  font-size: 40px;
+  color:red;
+}
+.title {
+  color: #ee3737;
+  padding: 18px;
+  text-align: center; /* Center align the title */
+}
+
+.dataframe-container {
+  display: flex;
+  justify-content: center;
+}
+
+.dataframe {
+  width: 80%; /* Adjust the width as needed */
+  border-collapse: collapse;
+  margin: 20px auto; /* Center the table horizontally */
+  font-size: 18px;
+  text-align: left;
+}
+
+.dataframe thead tr {
+  background-color: #f2f2f2;
+  color: #333;
+  text-align: left;
+}
+
+.dataframe th, .dataframe td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.dataframe tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.image{
+  margin:10px;
+  list-style: nonej;
+
+}
+
+/* src/index.css */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Navbar */
+.nav {
+  text-decoration: none;
+  color:white;
+  font-size: 20px;
+  &:hover {
+    color: black;
+  }
+}
