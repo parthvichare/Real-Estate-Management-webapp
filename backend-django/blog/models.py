@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 import numpy as np
 from django.db import models
-from django.utils import timezone
 
 class Post(models.Model):
     property_id = models.CharField(max_length=8, default='UNKNOWN', null=False)
@@ -23,16 +22,3 @@ class Post(models.Model):
 
     def __str__(self):
         return self.name or f"Property {self.property_id}"
-
-# ammenities=models.ExpressionListField(max_length=)
-
-
-    # def __str__(self):
-    #     return self.title
-
-
-
-# line = models.CharField(max_length=10, default='default_line_value')
-
-
-# Create your models here.

@@ -48,6 +48,9 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  # Specify your frontend URL here
 ]
 
+# Google Map API
+GOOGLE_MAPS_API_KEY = 'AIzaSyAS2KKp-Y538m_qYRD104cRbzd9DV_CrlA'
+
 # You can either allow all origins during development (not recommended for production)
 # CORS_ALLOW_ALL_ORIGINS = True
 

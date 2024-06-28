@@ -6,6 +6,8 @@ import logging
 from decimal import Decimal
 import openpyxl
 from .forms import PostForm
+import googlemaps
+from django.conf import settings
 
 def post_list(request):
     posts = Post.objects.all().order_by('-created_at')
@@ -21,23 +23,6 @@ def post_detail(request, pk):
     return render(request, 'blog/DataFrame.html', {'post': post})
 
 
-# React API endpoint
-def price_category(request):
-    posts = Post.objects.all()
-    price_filter = request.GET.get('price_filter', None)
-    
-    if price_filter == 'lac':
-        filtered_posts = posts.filter(price__contains='Lac')
-    elif price_filter == 'cr':
-        filtered_posts = posts.filter(price__contains='Cr')
-    else:
-        filtered_posts = posts
-
-    filtered_posts_list = list(filtered_posts.values())
-    # return render(request, 'blog/Pricefilter.html',{'posts':filtered_posts_list})
-    return JsonResponse({'posts': filtered_posts_list})
-
-
 def post_update(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
@@ -48,6 +33,7 @@ def post_update(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_update.html', {'form': form})
+
 
 
 # Actions-View functionality
@@ -73,7 +59,7 @@ def update(request, pk):
     return render(request, 'blog/edit_post.html', {'post': post})
 
 
-
+# React Pricefilter endpoint
 def pricefilter(request):
     posts = Post.objects.all()
     price_filter = request.GET.get('price_filter', None)
@@ -88,22 +74,6 @@ def pricefilter(request):
     filtered_posts_list = list(filtered_posts.values())
     return render(request, 'blog/Pricefilter.html',{'posts':filtered_posts_list})
     # return JsonResponse({'posts': filtered_posts_list})
-
-
-# def price_category(request, *args, **kwargs):
-#     # Retrieve all posts ordered by created_at descending
-#     posts = Post.objects.all().order_by('-created_at')
-
-#     # Initialize an empty list to store posts with prices in 'Lac'
-#     lac_posts = []
-
-#     # Iterate through each post
-#     for post in posts:
-#         # Check if the price string contains 'Lac'
-#         if 'Lac' in post.price:
-#             lac_posts.append(post)
-
-#     return render(request, 'blog/price_category.html', {'posts': lac_posts})
 
 
 
@@ -145,3 +115,42 @@ def contact(request, *args, **kwargs):
     # return JsonResponse({"my_info": my_context})
     return render(request, 'blog/contact.html', my_context)
 
+def home(request):
+    posts = Post.objects.all().order_by('-created_at')
+    my_context = {
+        "my_title": "It's about me",
+        "my_number": [234, 672, 643, 872, 'abc'],
+        "posts": posts,  # Correct key for posts
+    }
+    return render(request, 'blog/home.html', my_context)
+
+# def property_map_view(request):
+#     gmaps = googlemaps.Client(key=settings.GOOGLE_MAPS_API_KEY)
+    
+#     # Example property data with landmark and addressLocality
+#     properties = [
+#         {'name': 'Property 1', 'landmark': 'Lajwanti Garden, New Delhi', 'address': 'Lajwanti Garden, Janakpuri'},
+#         {'name': 'Property 2', 'landmark': 'Sector 18 Dwarka, New Delhi', 'address': 'Sector 18 Dwarka'},
+#         {'name': 'Property 3', 'landmark': 'Geeta Colony, New Delhi', 'address': 'Geeta Colony'},
+#         {'name': 'Property 4', 'landmark': 'Karol Bagh, New Delhi', 'address': 'Karol Bagh'},
+#         {'name': 'Property 5', 'landmark': 'Sector 14 Rohini, New Delhi', 'address': 'Sector 14 Rohini'},
+#         {'name': 'Property 6', 'landmark': 'Paschim Vihar Block B3, New Delhi', 'address': 'Block B3 Paschim Vihar'},
+#         {'name': 'Property 7', 'landmark': 'Chandra Nagar, New Delhi', 'address': 'Chander Nagar Krishna Nagar'},
+#     ]
+
+#     for prop in properties:
+#         geocode_result = gmaps.geocode(prop['address'])
+#         if geocode_result and len(geocode_result) > 0:
+#             location = geocode_result[0]['geometry']['location']
+#             prop['lat'] = location['lat']
+#             prop['lng'] = location['lng']
+#         else:
+#             prop['lat'] = None
+#             prop['lng'] = None
+
+#     context = {
+#         'properties': properties,
+#         'google_maps_api_key': settings.GOOGLE_MAPS_API_KEY,
+#     }
+    
+#     return render(request, 'blog/property_map.html', context)

@@ -16,15 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from blog.views import pricefilter,contact,price_category
+from blog.views import pricefilter,contact,home
 # from blog.views import contact_view
 
 urlpatterns = [
     path('', include('blog.urls')),
     path('admin/', admin.site.urls),
     path('Pricefilter/', pricefilter, name='pricefilter'),
-    path('price_category/', price_category, name='pricecategory'),
     path('contact/',contact,name='contact_view'),
+    path('',home,name='home')
+    # path('property_map/',property_map_view,name='property_map')
 ]
 
 
